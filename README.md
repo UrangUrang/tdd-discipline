@@ -5,6 +5,7 @@
 
 ###  prerequisite 
 - pip install -r requirements.txt
+- 신속하게 테스트를 실행할 수 있도록, 단축키를 설정하는 것을 추천합니다. 매번 마우스로 IDE의 작은 버튼을 누르러 가기에는 Life is too short! 니까요.
 
 ## 원칙 
 - 어떤 코드건 작성하기 전에 실패하는 자동화된 테스트를 작성하라.
