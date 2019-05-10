@@ -6,7 +6,9 @@ class Money(object):
     def __eq__(self, other):
         if not isinstance(other, Money):
             raise TypeError
-        return self.amount == other.amount
+
+        return self.amount == other.amount and \
+               self.__class__ == other.__class__
 
 
 class Dollar(Money):

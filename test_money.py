@@ -19,3 +19,5 @@ def test_equality():
     assert (Franc(5) == Franc(5)) is True
     assert (Franc(5) == Franc(6)) is False
 
+    assert (Franc(5) == Dollar(5)) is False
+    assert (Franc(5) == Dollar(6)) is False
