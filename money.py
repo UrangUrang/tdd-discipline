@@ -13,6 +13,14 @@ class Money(ABC):
         return self.amount == other.amount and \
                self.__class__ == other.__class__
 
+    @staticmethod
+    def dollar(amount):
+        return Dollar(amount, "USD")
+
+    @staticmethod
+    def franc(amount):
+        return Franc(amount, "CHF")
+
     def currency(self):
         return self.currency
 
