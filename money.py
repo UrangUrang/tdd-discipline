@@ -11,7 +11,10 @@ class Money(ABC):
             raise TypeError
 
         return self.amount == other.amount and \
-               self.__class__ == other.__class__
+               self.currency == other.currency
+
+    def __str__(self):
+        return "{} - {}".format(self.amount, self.currency)
 
     @staticmethod
     def dollar(amount):
@@ -24,18 +27,15 @@ class Money(ABC):
     def currency(self):
         return self.currency
 
+    def times(self, multiplier):
+        return Money(self.amount * multiplier, self.currency)
+
 
 class Dollar(Money):
     def __init__(self, amount, currency):
         super().__init__(amount, currency)
 
-    def times(self, multiplier):
-        return Dollar(self.amount * multiplier, "USD")
-
 
 class Franc(Money):
     def __init__(self, amount, currency):
         super().__init__(amount, currency)
-
-    def times(self, multiplier):
-        return Franc(self.amount * multiplier, "CHF")
