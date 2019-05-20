@@ -1,7 +1,10 @@
+from abc import ABC
 
-class Money(object):
-    def __init__(self, amount):
+
+class Money(ABC):
+    def __init__(self, amount, currency):
         self.amount = amount
+        self.currency = currency
 
     def __eq__(self, other):
         if not isinstance(other, Money):
@@ -10,19 +13,21 @@ class Money(object):
         return self.amount == other.amount and \
                self.__class__ == other.__class__
 
+    def currency(self):
+        return self.currency
+
 
 class Dollar(Money):
-
-    def __init__(self, amount):
-        super().__init__(amount)
+    def __init__(self, amount, currency):
+        super().__init__(amount, currency)
 
     def times(self, multiplier):
-        return Dollar(self.amount * multiplier)
+        return Dollar(self.amount * multiplier, "USD")
 
 
 class Franc(Money):
-    def __init__(self, amount):
-        super().__init__(amount)
+    def __init__(self, amount, currency):
+        super().__init__(amount, currency)
 
     def times(self, multiplier):
-        return Franc(self.amount * multiplier)
+        return Franc(self.amount * multiplier, "CHF")
