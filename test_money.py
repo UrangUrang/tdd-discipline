@@ -1,4 +1,4 @@
-from money import Dollar, Franc, Money
+from money import Dollar, Franc, Money, Bank
 
 
 def test_multiplication():
@@ -15,11 +15,8 @@ def test_franc_multiplication():
 
 def test_equality():
     assert (Dollar(5, "USD") == Dollar(5, "USD")) is True
-    assert (Dollar(5, "USD") == Dollar(6, "USD")) is False
     assert (Franc(5, "CHF") == Franc(5, "CHF")) is True
-    assert (Franc(5, "CHF") == Franc(6, "CHF")) is False
-    assert (Franc(5, "CHF") == Dollar(5, "USD")) is False
-    assert (Franc(5, "CHF") == Dollar(6, "USD")) is False
+    assert (Money(5, "USD") == Money(5, "USD")) is True
 
 
 def test_different_class_equality():
@@ -33,5 +30,13 @@ def test_currency():
 
 def test_tostring():
     money = Money(10, "USD")
-    print(money.__str__())
-    print(money.__repr__())
+    assert money.__str__() == "10 - USD"
+    assert money.__repr__() != "10 - USD"
+
+
+def test_simple_addition():
+    five = Money.dollar(5)
+    sum = five.plus(five)
+    bank = Bank()
+    reduced = bank.reduce(sum, "USD")
+    assert Money.dollar(10) == reduced

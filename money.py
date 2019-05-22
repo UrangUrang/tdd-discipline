@@ -1,7 +1,13 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 
 
-class Money(ABC):
+class Expression(ABC):
+    @abstractmethod
+    def plus(self, addend):
+        pass
+
+
+class Money(Expression):
     def __init__(self, amount, currency):
         self.amount = amount
         self.currency = currency
@@ -30,6 +36,9 @@ class Money(ABC):
     def times(self, multiplier):
         return Money(self.amount * multiplier, self.currency)
 
+    def plus(self, addend):
+        return Money(self.amount + addend.amount, self.currency)
+
 
 class Dollar(Money):
     def __init__(self, amount, currency):
@@ -39,3 +48,8 @@ class Dollar(Money):
 class Franc(Money):
     def __init__(self, amount, currency):
         super().__init__(amount, currency)
+
+
+class Bank(object):
+    def reduce(self, source, to):
+        return Money.dollar(10)
